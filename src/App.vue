@@ -9,13 +9,7 @@
     </div>
 </template>
 <script>
-export default {
-    computed: {
-        firstDayOfAWeek() {
-            return this.$material.locale.firstDayOfAWeek;
-        }
-    }
-};
+export default {};
 </script>
 <style lang="scss">
 #app {

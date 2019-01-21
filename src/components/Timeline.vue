@@ -7,7 +7,15 @@
             :key="item.id"
             tag="div"
         >
-            <p>{{ item.itemDescription }} {{ item.actionType }} {{ item.actionDate }} {{ item.price }}</p>
+            <p>
+                {{ item.itemDescription }} {{ item.actionType }} {{ item.actionDate | ISOStringToDateString }}
+                <span
+                    v-if="item.price"
+                >
+                    {{ item.price | formatMoney}}
+                    <md-icon>attach_money</md-icon>
+                </span>
+            </p>
         </router-link>
     </div>
 </template>

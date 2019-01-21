@@ -27,7 +27,33 @@ Vue.filter('actionToText', function (value) {
         default:
             return 'Unknown';
     }
-})
+});
+
+function revertString(value) {
+
+    if (!value) {
+        return value;
+    }
+
+    return value.split('').reverse().join('')
+}
+
+Vue.filter('formatMoney', function (value) {
+    if (typeof value !== 'number') {
+        return value;
+    }
+
+    var valueAsArray = (value + '').split('.');
+    const valueHasDecimals = valueAsArray.length > 1;
+    const decimals = valueHasDecimals ? ',' + valueAsArray.pop() : '';
+    var integerPartOfValue = valueAsArray.shift();
+
+    return revertString(revertString(integerPartOfValue).replace(/(.{3})(.{1})/g, '$1 $2')) + decimals;
+});
+
+Vue.filter('ISOStringToDateString', function (value) {
+    return value.split('T')[0];
+});
 
 const app = new Vue({
     router,

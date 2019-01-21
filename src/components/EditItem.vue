@@ -1,41 +1,31 @@
 <template>
     <div>
-        <form>
-            <label for="itemDescription">Description</label>
-            <input id="itemDescription" type="text" v-model="item.itemDescription">
-            <label for="action-date">Date</label>
-            <input id="action-date" type="date" v-model="item.actionDate">
-            <label v-for="option in options" :key="option">
-                {{ option }}
-                <input
-                    type="radio"
-                    name="actionType"
-                    :value="option"
-                    v-model="item.actionType"
-                >
-            </label>
-            <label for="price">Price</label>
-            <input id="price" type="number" v-model="item.price">
-            <button @click.prevent.stop="update">Submit</button>
-        </form>
+        <mini-item-form :item="this.item" :sending="sending" :submitMethod="update"></mini-item-form>
     </div>
 </template>
 <script>
 import axios from "axios";
+import ItemForm from "./ItemForm.vue";
+
 export default {
     name: "itemedit",
     data() {
         return {
             item: {},
-            options: ["SOLD_IT", "GAVE_IT_AWAY", "THREW_IT", "PURCHASED_IT"]
+            sending: false
         };
     },
     methods: {
-        update() {
+        update(item) {
+            this.sending = true;
             axios
-                .put("/items/" + this.$route.params.id, this.item)
+                .put("/items/" + this.$route.params.id, item)
                 .then(function() {
+                    this.sending = false;
                     alert("great success!");
+                })
+                .catch(error => {
+                    this.sending = false;
                 });
         }
     },
@@ -44,6 +34,9 @@ export default {
         axios.get("/items/" + this.$route.params.id).then(result => {
             that.item = result.data;
         });
+    },
+    components: {
+        "mini-item-form": ItemForm
     }
 };
 </script>
