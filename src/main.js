@@ -29,6 +29,21 @@ Vue.filter('actionToText', function (value) {
     }
 });
 
+Vue.filter('actionToIconName', function (value) {
+    switch (value) {
+        case 'SOLD_IT':
+            return 'money'
+        case 'GAVE_IT_AWAY':
+            return 'favorite'
+        case 'THREW_IT':
+            return 'delete'
+        case 'PURCHASED_IT':
+            return 'plus_one'
+        default:
+            return 'Unknown';
+    }
+});
+
 function revertString(value) {
 
     if (!value) {

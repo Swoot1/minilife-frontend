@@ -7,15 +7,20 @@
             :key="item.id"
             tag="div"
         >
-            <p>
-                {{ item.itemDescription }} {{ item.actionType }} {{ item.actionDate | ISOStringToDateString }}
-                <span
-                    v-if="item.price"
-                >
-                    {{ item.price | formatMoney}}
-                    <md-icon>attach_money</md-icon>
-                </span>
-            </p>
+            <md-card>
+                <md-card-header>
+                    <div class="md-title">{{ item.itemDescription }}</div>
+                </md-card-header>
+
+                <md-card-content>
+                    <md-icon>{{ item.actionType | actionToIconName }}</md-icon>
+                    {{ item.actionDate | ISOStringToDateString }}
+                    <span v-if="item.price">
+                        {{ item.price | formatMoney}}
+                        <md-icon>attach_money</md-icon>
+                    </span>
+                </md-card-content>
+            </md-card>
         </router-link>
     </div>
 </template>
