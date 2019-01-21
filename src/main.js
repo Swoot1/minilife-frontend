@@ -67,6 +67,11 @@ Vue.filter('formatMoney', function (value) {
 });
 
 Vue.filter('ISOStringToDateString', function (value) {
+
+    if (!value || value.indexOf('T') === -1) {
+        return value;
+    }
+
     return value.split('T')[0];
 });
 

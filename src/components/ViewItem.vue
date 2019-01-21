@@ -1,7 +1,15 @@
 <template>
-    <div>
-        <p>
-            {{ item.itemDescription }} {{ item.actionType }} {{ item.dateOfAction }} {{ item.price }}
+    <md-card>
+        <md-card-header>
+            <div class="md-title">{{ item.itemDescription }}</div>
+        </md-card-header>
+
+        <md-card-content>
+            <md-icon v-if="item.actionType">{{ item.actionType | actionToIconName }}</md-icon>
+            {{ item.actionDate | ISOStringToDateString }}
+            <span
+                v-if="item.price"
+            >{{ item.price | formatMoney}}</span>
             <md-button
                 class="md-icon-button md-dense md-raised md-primary"
                 :to="{ name: 'itemedit', params: { id: item.id} }"
@@ -14,8 +22,8 @@
             >
                 <md-icon>delete</md-icon>
             </md-button>
-        </p>
-    </div>
+        </md-card-content>
+    </md-card>
 </template>
 <script>
 import axios from "axios";

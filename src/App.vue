@@ -1,10 +1,16 @@
 <template>
     <div id="app">
-        <router-view/>
-        <div id="nav">
-            <router-link to="/">Home</router-link>|
-            <router-link :to="{ name: 'timeline' }">Timeline</router-link>|
-            <router-link :to="{ name: 'newitem' }">New item</router-link>
+        <router-view></router-view>
+        <div class="phone-viewport">
+            <md-bottom-bar md-sync-route>
+                <md-bottom-bar-item to="/" md-label="Home" md-icon="home"></md-bottom-bar-item>
+                <md-bottom-bar-item :to="{ name: 'timeline' }" md-label="Timeline" md-icon="money"></md-bottom-bar-item>
+                <md-bottom-bar-item
+                    :to="{ name: 'newitem' }"
+                    md-label="New Item"
+                    md-icon="favorite"
+                ></md-bottom-bar-item>
+            </md-bottom-bar>
         </div>
     </div>
 </template>
