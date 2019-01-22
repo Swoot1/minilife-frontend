@@ -17,15 +17,19 @@ export default {
     },
     methods: {
         update(item) {
+            const that = this;
             this.sending = true;
             axios
                 .put("/items/" + this.$route.params.id, item)
-                .then(function() {
-                    this.sending = false;
-                    alert("great success!");
+                .then(response => {
+                    that.sending = false;
+                    that.$router.push({
+                        name: "viewitem",
+                        params: { id: that.$route.params.id }
+                    });
                 })
                 .catch(error => {
-                    this.sending = false;
+                    that.sending = false;
                 });
         }
     },
