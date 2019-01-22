@@ -2,14 +2,14 @@
     <div id="app">
         <router-view></router-view>
         <div class="phone-viewport">
-            <md-bottom-bar md-sync-route>
-                <md-bottom-bar-item to="/" md-label="Home" md-icon="home"></md-bottom-bar-item>
-                <md-bottom-bar-item :to="{ name: 'timeline' }" md-label="Timeline" md-icon="money"></md-bottom-bar-item>
+            <md-bottom-bar md-sync-route class="mini-bottom-menu">
+                <md-bottom-bar-item to="/" md-label="Home" md-icon="home" exact></md-bottom-bar-item>
                 <md-bottom-bar-item
                     :to="{ name: 'newitem' }"
-                    md-label="New Item"
-                    md-icon="favorite"
+                    md-label="Action"
+                    md-icon="repeat_one"
                 ></md-bottom-bar-item>
+                <md-bottom-bar-item :to="{ name: 'timeline' }" md-label="Timeline" md-icon="list"></md-bottom-bar-item>
             </md-bottom-bar>
         </div>
     </div>
@@ -18,21 +18,18 @@
 export default {};
 </script>
 <style lang="scss">
-#app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
+html,
+body {
+    height: 100%;
+    margin-bottom: 85px;
 }
-#nav {
-    padding: 30px;
-    a {
-        font-weight: bold;
-        color: #2c3e50;
-        &.router-link-exact-active {
-            color: #42b983;
-        }
-    }
+#app {
+    min-height: 100%;
+}
+.mini-bottom-menu {
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
 }
 </style>
